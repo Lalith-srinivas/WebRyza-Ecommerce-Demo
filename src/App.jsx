@@ -70,7 +70,7 @@ const App = () => {
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/categories" element={<CategoriesPage />} />
-                  <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+                  <Route path="/cart" element={<CartPage />} />
                   {/* Simple content pages so footer links are not broken */}
                   <Route path="/about" element={<InfoPage />} />
                   <Route path="/careers" element={<InfoPage />} />
@@ -79,7 +79,7 @@ const App = () => {
                   <Route path="/privacy" element={<InfoPage />} />
                   <Route path="/terms" element={<InfoPage />} />
                   <Route path="/cookies" element={<InfoPage />} />
-                  <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+                  <Route path="/account" element={<Account />} />
                   <Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
                   <Route path="*" element={
                     <div className="empty-state">

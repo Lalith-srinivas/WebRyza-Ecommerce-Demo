@@ -8,7 +8,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import Footer from "../components/Footer";
 
 const Account = () => {
-  const { user, userProfile, logout, fetchUserProfile, isAdmin } = useAuth();
+  const { user, userProfile, logout, fetchUserProfile, isAdmin, setShowLogin } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -83,6 +83,26 @@ const Account = () => {
   };
 
   const statusColor = { confirmed: "#0c831f", pending: "#f5a623", delivered: "#1a73e8", cancelled: "#d32f2f" };
+
+  if (!user) {
+    return (
+      <div className="account-page">
+        <div className="account-container" style={{ justifyContent: "center", alignItems: "center", minHeight: "60vh" }}>
+          <div className="account-card" style={{ maxWidth: "400px", textAlign: "center", padding: "3rem 2rem" }}>
+            <div style={{ fontSize: "4rem", marginBottom: "1.5rem" }}>👤</div>
+            <h2 style={{ marginBottom: "0.5rem" }}>My Account</h2>
+            <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>
+              Login to view your profile, manage orders, and save addresses.
+            </p>
+            <button className="btn-primary btn-full" onClick={() => setShowLogin(true)}>
+              Login / Sign Up
+            </button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="account-page">

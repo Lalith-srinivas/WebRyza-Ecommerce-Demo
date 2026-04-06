@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const MobileBottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cartCount } = useCart();
+  const { user, setShowLogin } = useAuth();
 
   const navItems = [
     { name: "Home", path: "/", icon: "🏠", color: "#0c831f" },
@@ -24,7 +26,13 @@ const MobileBottomNav = () => {
               ? "active"
               : ""
           }`}
-          onClick={() => navigate(item.path)}
+          onClick={() => {
+            if (!user && (item.path.includes("/account") || item.path.includes("tab=orders"))) {
+              setShowLogin(true);
+            } else {
+              navigate(item.path);
+            }
+          }}
           style={{ color: location.pathname === item.path ? item.color : "var(--text-muted)" }}
         >
           <span className="nav-icon">

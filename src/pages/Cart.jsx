@@ -5,17 +5,18 @@ import { useAuth } from "../context/AuthContext";
 
 export default function CartPage() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setShowLogin } = useAuth();
   const { cartItems, cartTotal, totalDeliveryCharge, totalHandlingFee, updateQuantity, removeFromCart } = useCart();
   const grandTotal = cartTotal + totalDeliveryCharge + totalHandlingFee;
 
-  if (!user) {
+   if (!user) {
     return (
       <div className="cart-page">
-        <div className="cart-page-card">
-          <h2>Your cart</h2>
-          <p className="info-muted">Please login to view your cart.</p>
-          <Link to="/account" className="btn-primary">Go to Profile</Link>
+        <div className="cart-page-card" style={{ textAlign: "center", padding: "3rem" }}>
+          <div style={{ fontSize: "4rem", marginBottom: "1.5rem" }}>🛒</div>
+          <h2>My Cart</h2>
+          <p className="info-muted" style={{ marginBottom: "2rem" }}>Login to view your cart items.</p>
+          <button className="btn-primary" onClick={() => setShowLogin(true)}>Login to Continue</button>
         </div>
       </div>
     );

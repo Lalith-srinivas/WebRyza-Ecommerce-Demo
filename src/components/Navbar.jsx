@@ -6,11 +6,10 @@ import { useTheme } from "../context/ThemeContext";
 import LoginModal from "./LoginModal";
 
 const Navbar = () => {
-  const { user, userProfile, logout, isAdmin } = useAuth();
+  const { user, userProfile, logout, isAdmin, showLogin, setShowLogin } = useAuth();
   const { cartCount, setCartOpen } = useCart();
   const { theme, toggleTheme } = useTheme();
   const [searchQuery, setSearchQuery] = useState("");
-  const [showLogin, setShowLogin] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -163,6 +162,17 @@ const Navbar = () => {
             <button className="theme-toggle" onClick={toggleTheme} title="Toggle theme" style={{ background: "var(--surface-alt)", borderRadius: "var(--radius-md)", width: "44px", height: "44px", display: "grid", placeItems: "center" }}>
               {theme === "light" ? "🌙" : "☀️"}
             </button>
+            
+            {user ? (
+              <Link to="/account" className="mobile-user-btn" style={{ background: "var(--surface-alt)", borderRadius: "var(--radius-md)", width: "44px", height: "44px", display: "grid", placeItems: "center", textDecoration: "none" }}>
+                <span style={{ fontSize: "1.2rem" }}>👤</span>
+              </Link>
+            ) : (
+              <button className="login-btn-mobile" onClick={() => setShowLogin(true)} style={{ background: "var(--primary)", color: "white", padding: "0.5rem 1rem", borderRadius: "var(--radius-md)", fontWeight: "600", fontSize: "0.9rem", border: "none" }}>
+                Login
+              </button>
+            )}
+
             <button className="mobile-cart-btn" onClick={handleCartClick} aria-label="Open cart">
               🛒
               {cartCount > 0 && <span className="mobile-cart-badge">{cartCount}</span>}

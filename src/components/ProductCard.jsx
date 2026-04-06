@@ -6,7 +6,7 @@ import { useToast } from "../context/ToastContext";
 
 const ProductCard = ({ product }) => {
   const { addToCart, cartItems, updateQuantity, removeFromCart } = useCart();
-  const { user } = useAuth();
+  const { user, setShowLogin } = useAuth();
   const { showToast } = useToast();
   const [adding, setAdding] = useState(false);
 
@@ -19,7 +19,8 @@ const ProductCard = ({ product }) => {
   const handleAdd = async (e) => {
     e.preventDefault();
     if (!user) {
-      showToast("Please login to add items to cart", "error");
+      setShowLogin(true);
+      showToast("Please login to add items to cart", "info");
       return;
     }
     setAdding(true);
